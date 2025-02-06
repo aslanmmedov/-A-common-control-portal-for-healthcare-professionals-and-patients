@@ -10,13 +10,14 @@ const DoctorSchema = new Schema(
     fin: { type: String, required: true, unique: true },
     phoneNumber: { type: Number, required: true },
     adress: { type: String, required: true },
-    email: { type: String, required: true },
+    email: { type: String, default:null },
     password: { type: Number, required: true },
     role: { type: String, default: "user" },
     duty: { type: String, require: true },
     dateOfEmployment: { type: Date, required: true },
+    workHours: { type: String, required: true },
     hospitalId: { type: mongoose.Schema.Types.ObjectId, ref: "Hospitals" },
-    departmentId: {type: mongoose.Schema.Types.ObjectId, ref: "Departments"}
+    departmentId: { type: mongoose.Schema.Types.ObjectId, ref: "Departments" },
   },
   { versionKey: false, timestamps: true }
 );

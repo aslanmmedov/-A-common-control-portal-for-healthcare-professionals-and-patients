@@ -14,6 +14,7 @@ const PatientSchema = new Schema(
     adress: { type: String, required: true },
     password: { type: String, default: null },
     email: { type: String, default: null },
+    gender:{type:String,required:true},
     role: { type: String, default: "user" },
     doctorId: {
       type: mongoose.Schema.Types.ObjectId,
