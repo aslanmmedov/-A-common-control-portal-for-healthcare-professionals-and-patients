@@ -5,17 +5,22 @@ const PatientRouter = require("./routers/PatientRouter");
 const DoctorRouter = require("./routers/DoctorRouter");
 const HospitalRouter = require("./routers/HospitalRouter");
 const DepartmentRouter = require("./routers/DepartmentRouter");
+const NewsRouter = require("./routers/NewsRouter");
 const app = express()
 const port = 8080
+const path = require("path");
 
 app.use(cors());
 app.use(express.json())
 
-app.use('/patients', PatientRouter);
-app.use('/doctors', DoctorRouter);
-app.use('/hospitals', HospitalRouter);
-app.use('/departments', DepartmentRouter);
+app.use('/api/patients', PatientRouter);
+app.use('/api/doctors', DoctorRouter);
+app.use('/api/hospitals', HospitalRouter);
+app.use('/api/departments', DepartmentRouter);
+app.use('/api/news', NewsRouter);
 
+
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 mongoose.connect('mongodb+srv://aslanzmazmp202:aslan2004@clusterimmigration.njfsy.mongodb.net/PortalDb?retryWrites=true&w=majority&appName=ClusterImmigration')
   .then(() => {
