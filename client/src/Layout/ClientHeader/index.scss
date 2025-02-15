@@ -1,0 +1,133 @@
+#clientHeader{
+  nav {
+    .line{
+        width:100%;
+        height:1px;
+        background-color:black;
+        opacity: 0.1;
+    }
+    .navTop {
+      font-size: 1rem;
+      height: 40px;
+      opacity: 0.5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .phoneAndEmail {
+        display: flex;
+        gap: 1rem;
+        p{
+            display:flex;
+            align-items: center;
+            gap:0.2rem;
+        }
+      }
+      .links {
+        ul {
+          display: flex;
+          gap: 0.8rem;
+          li {
+            a {
+              color: black;
+            }
+          }
+        }
+      }
+    }
+    .navDown {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding:1rem 0 1rem 0;
+      .pageLinks{
+        ul{
+            display:flex;
+            gap:2rem;
+            li{
+                a{
+                    color:#8F9094;
+                    font-weight: 500;
+                    font-size: 1.1rem;
+                }
+                & a:hover{
+                  color:#0085c9;
+                }
+                p{
+                    transition: all 0.6s;
+                    height:3px;
+                    width:0;
+                }
+                & a:hover + p{
+                    background-color:#0085c9;
+                    width:100%;
+                }
+            }
+        }
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        img {
+          height: 60px;
+          width: 63px;
+        }
+        h1 {
+            font-size:1.7rem;
+          color: #0085c9;
+          font-weight: 600;
+        }
+      }
+      .menuBar {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  #clientHeader {
+    nav {
+      .navTop {
+        display: none;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  #clientHeader {
+    nav {
+      .navTop {
+        display: none;
+      }
+      .navDown {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding:1rem 0 1rem 1rem;
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          img {
+            height: 50px;
+            width: 50px;
+          }
+          h1 {
+            font-size: 1.2rem;
+            color: #0085c9;
+          }
+        }
+        .pageLinks{
+            display:none;
+        }
+        .menuBar {
+          display: flex;
+          align-items: center;
+          justify-content:end;
+          color:#0085c9;
+        }
+      }
+    }
+  }
+}

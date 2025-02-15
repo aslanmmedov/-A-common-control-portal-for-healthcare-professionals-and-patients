@@ -10,8 +10,8 @@ const getAllData = async (req, res) => {
 }
 const addData = async (req, res) => {
     try {
-        const imagePath = req.file.path;
-        const News =  NewsModel({...req.body,image: `http://localhost:8080/${imagePath}`,});
+        const imageName = req.file.filename;
+        const News =  NewsModel({...req.body,image: `http://localhost:8080/${imageName}`,});
         await News.save();
         res.status(201).json({data:News,message:"Succes"})
     } catch (error) {

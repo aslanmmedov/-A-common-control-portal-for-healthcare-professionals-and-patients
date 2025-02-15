@@ -20,7 +20,7 @@ app.use('/api/departments', DepartmentRouter);
 app.use('/api/news', NewsRouter);
 
 
-app.use("/images", express.static(path.join(__dirname, "images")));
+app.use(express.static(path.join(__dirname, "images")));
 
 mongoose.connect('mongodb+srv://aslanzmazmp202:aslan2004@clusterimmigration.njfsy.mongodb.net/PortalDb?retryWrites=true&w=majority&appName=ClusterImmigration')
   .then(() => {

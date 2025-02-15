@@ -1,6 +1,10 @@
 
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import ClientLayout from './ClientLayout'
+import AdminLayout from './AdminLayout'
+import AdminDashboard from './Pages/Admin/AdminDashboard'
+import Home from './Pages/Client/Home'
 
 function App() {
 
