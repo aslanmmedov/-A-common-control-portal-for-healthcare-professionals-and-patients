@@ -1,5 +1,11 @@
 #clientHeader{
+  margin-bottom: 8rem;  
   nav {
+    width:100%;
+    position:fixed;
+      top:0;
+      z-index:4;
+      background-color: #fff;
     .line{
         width:100%;
         height:1px;
@@ -38,7 +44,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding:1rem 0 1rem 0;
+      padding:1rem 0 1rem 0;   
       .pageLinks{
         ul{
             display:flex;
