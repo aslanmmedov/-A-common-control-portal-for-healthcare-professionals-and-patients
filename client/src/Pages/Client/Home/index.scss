@@ -1,60 +1,478 @@
-main{
-    #heroBanner{
-    background-image: linear-gradient(to left, transparent, #ffffffd9), url("./images/Home/Poliklinika.webp");
+main {
+  #heroBanner {
+    background-image: linear-gradient(to left, transparent, #ffffffd9),
+      url("./images/Home/Poliklinika.webp");
     background-repeat: no-repeat;
     background-size: cover;
-	background-position: center;
-	/*background-attachment: fixed;*/
-	backdrop-filter: blur(3px);
-    background-color:#fff;
-        .herobanner{
-            height:85vh;
-            width:100%;
-            display:flex;
-            align-items: center;
-            .heroText{
-                width:60%;
-                h1{
-                    font-size:3.2rem;
-                    color:#0474ac;
-                    margin-bottom: 1rem;
-                    font-weight: 600;
-                    letter-spacing: 1px;
-                }
-                p{
-                    font-size:1.1rem;
-                    margin-bottom: 3rem;
-                    color:#494a4f;
-                }
-                button{
-                    display:flex;
-                    gap:0.6rem;
-                    align-items: center;
-                    justify-content: center;
-                    border:none;
-                    border-radius: 12px;
-                    background-color:#0085C9 ;
-                    padding:0.9rem 1.6rem;
-                    color:white;
-                    font-size:1.2rem;
-                    transition: all 0.6s;
-                    &:hover{
-                        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-                        background-color: #939498;
-                    }
-                    span{
-                        margin-top: 0.3rem;
-                        transition: all 0.6s;
-                    }
-                }
-                button:hover span{
-                    opacity: 1;
-                    opacity:1;
-                }
-                
-            }
+    background-position: center;
+    /*background-attachment: fixed;*/
+    backdrop-filter: blur(3px);
+    background-color: #fff;
+    .herobanner {
+      height: 85vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      .heroText {
+        width: 60%;
+        h1 {
+          font-size: 3.2rem;
+          color: #0474ac;
+          margin-bottom: 1rem;
+          font-weight: 600;
+          letter-spacing: 1px;
         }
+        p {
+          font-size: 1.1rem;
+          margin-bottom: 3rem;
+          color: #494a4f;
+        }
+        button {
+          display: flex;
+          gap: 0.6rem;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          border-radius: 12px;
+          background-color: #0085c9;
+          padding: 0.9rem 1.6rem;
+          color: white;
+          font-size: 1.2rem;
+          transition: all 0.6s;
+          &:hover {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            background-color: #939498;
+          }
+          span {
+            margin-top: 0.3rem;
+            transition: all 0.6s;
+          }
+        }
+        button:hover span {
+          opacity: 1;
+          opacity: 1;
+        }
+      }
     }
+  }
+  #otoCounter {
+    margin-top: 4rem;
+    background-image: linear-gradient(to top, #ffffffcf, #ffffff),
+      url("https://www.pngkit.com/png/detail/5-56581_heartbeat-line-png-colorfulness.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(6px);
+    background-color: #fff;
+    .otocounter {
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      h1 {
+        font-size: 2.8rem;
+        color: #0085c9;
+        font-weight: 500;
+      }
+      p {
+        font-size: 0.9rem;
+        opacity: 0.8;
+        color: #939498;
+        min-width: 210px;
+      }
+      .otoflex {
+        padding: 3rem 5rem;
+        font-size: 2rem;
+        color: #0085c9;
+        font-weight: 600;
+        .holder {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          gap: 1rem;
+          box-sizing: border-box;
+          min-width: 200px;
+          h3 {
+            font-size: 3rem;
+          }
+        }
+        p {
+          font-size: 0.9rem;
+          font-weight: 400;
+          opacity: 0.8;
+          color: #939498;
+        }
+      }
+    }
+  }
+  #e-Services {
+    margin-top: 8rem;
+    padding:1rem;
+    background-image: linear-gradient(to top, #00000005, #ffffff6f);
+    .e-services {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      .head {
+        text-align: center;
+        h1 {
+          font-size: 2.8rem;
+          color: #0085c9;
+          font-weight: 500;
+        }
+        p {
+          font-size: 0.9rem;
+          opacity: 0.8;
+          color: #939498;
+          min-width: 210px;
+        }
+      }
+      .img1 {
+        background-image: linear-gradient(to bottom, #ffffff5d, #ffffff),
+          url("./images/Home/Vaccine.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        backdrop-filter: blur(6px);
+        background-color: #fff;
+      }
+      .img2 {
+        background-image: linear-gradient(to bottom, #ffffff5c, #ffffff),
+          url("./images/Home/Müayinə.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        backdrop-filter: blur(6px);
+        background-color: #fff;
+      }
+      .img3 {
+        background-image: linear-gradient(to bottom, #ffffff67, #ffffff),
+          url("./images/Home/Registiration.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        backdrop-filter: blur(6px);
+        background-color: #fff;
+      }
+      .e-serviceCard {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 250px;
+        padding: 7rem 1rem 1rem;
+        border-radius: 7px;
+        transition: all 0.6s;
+        cursor: pointer;
+        .text {
+          h2 {
+            color: #0085c9;
+            font-size: 1.3rem;
+          }
+          p {
+            color: #535456;
+            font-size: 0.9rem;
+          }
+        }
+        &:hover {
+          box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+      }
+      h3 {
+        margin-top: 2rem;
+        a {
+          font-weight: 400;
+          color: #0085c9;
+        }
+      }
+    }
+  }
+  #newsSection {
+    background-image: linear-gradient(to top, #00000005, #ffffff6f);
+    margin-top: 8rem;
+    .newssection {
+        .newsHead{
+            padding-left: 1rem;
+        h1 {
+          font-size: 2.8rem;
+          color: #0085c9;
+          font-weight: 500;
+          margin-bottom: 3rem;
+        }
+        }
+      .newsCard {
+        cursor: pointer;
+        display:flex;
+        flex-direction: column;
+        gap:1rem;
+        .image {
+            width:100%;
+            height:250px;
+            overflow: hidden;
+            border-radius: 10px;
+          img {
+            width: 100%;
+          }
+        }
+        &:hover .image{
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+        h2{
+            font-size: 1.3rem;
+            color:#252628;
+        }
+        p{
+            display:flex;
+            gap:0.5rem;
+            align-items: center;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+      }
+    }
+  }
 }
-
-  
+@media only screen and (max-width:767px){
+    main {
+        #heroBanner {
+          background-image: linear-gradient(to left, transparent, #ffffff),
+            url("./images/Home/Poliklinika.webp");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          /*background-attachment: fixed;*/
+          backdrop-filter: blur(3px);
+          background-color: #fff;
+          .herobanner {
+            padding:1.6rem;
+            height: 50vh;
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            .heroText {
+                width:100%;
+              h1 {
+                font-size: 1.6rem;
+                color: #0474ac;
+                margin-bottom: 1rem;
+                font-weight: 600;
+                letter-spacing: 1px;
+              }
+              p {
+                font-size: 0.7rem;
+                margin-bottom: 3rem;
+                color: #494a4f;
+              }
+              button {
+                display: flex;
+                gap: 0.6rem;
+                align-items: center;
+                justify-content: center;
+                border: none;
+                border-radius: 12px;
+                background-color: #0085c9;
+                padding: 0.7rem 1.2rem;
+                color: white;
+                font-size: 0.8rem;
+                transition: all 0.6s;
+                &:hover {
+                  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                  background-color: #939498;
+                }
+                span {
+                  margin-top: 0.3rem;
+                  transition: all 0.6s;
+                }
+              }
+              button:hover span {
+                opacity: 1;
+              }
+            }
+          }
+        }
+        #otoCounter {
+          margin-top: 4rem;
+          background-image: linear-gradient(to top, #ffffffcf, #ffffff),
+            url("https://www.pngkit.com/png/detail/5-56581_heartbeat-line-png-colorfulness.png");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          backdrop-filter: blur(6px);
+          background-color: #fff;
+          .otocounter {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            h1 {
+              font-size: 2rem;
+              color: #0085c9;
+              font-weight: 500;
+            }
+            p {
+              font-size: 0.8rem;
+              opacity: 0.8;
+              color: #939498;
+              min-width: 210px;
+            }
+            .otoflex {
+              padding: 3rem 5rem;
+              font-size: 2rem;
+              color: #0085c9;
+              font-weight: 600;
+              .holder {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                gap: 1rem;
+                box-sizing: border-box;
+                min-width: 200px;
+                h3 {
+                  font-size: 3rem;
+                }
+              }
+              p {
+                font-size: 0.9rem;
+                font-weight: 400;
+                opacity: 0.8;
+                color: #939498;
+              }
+            }
+          }
+        }
+        #e-Services {
+          margin-top: 5rem;
+          .e-services {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            .head {
+              text-align: center;
+              h1 {
+                font-size: 2rem;
+                color: #0085c9;
+                font-weight: 500;
+              }
+              p {
+                font-size: 0.9rem;
+                opacity: 0.8;
+                color: #939498;
+                min-width: 210px;
+              }
+            }
+            .img1 {
+              background-image: linear-gradient(to bottom, #ffffff5d, #ffffff),
+                url("./images/Home/Vaccine.jpeg");
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+              backdrop-filter: blur(6px);
+              background-color: #fff;
+            }
+            .img2 {
+              background-image: linear-gradient(to bottom, #ffffff5c, #ffffff),
+                url("./images/Home/Müayinə.jpg");
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+              backdrop-filter: blur(6px);
+              background-color: #fff;
+            }
+            .img3 {
+              background-image: linear-gradient(to bottom, #ffffff67, #ffffff),
+                url("./images/Home/Registiration.jpg");
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: center;
+              backdrop-filter: blur(6px);
+              background-color: #fff;
+            }
+            .e-serviceCard {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              min-height: 250px;
+              padding: 7rem 1rem 1rem;
+              border-radius: 7px;
+              transition: all 0.6s;
+              cursor: pointer;
+              .text {
+                h2 {
+                  color: #0085c9;
+                  font-size: 1.3rem;
+                }
+                p {
+                  color: #535456;
+                  font-size: 0.9rem;
+                }
+              }
+              &:hover {
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+              }
+            }
+            h3 {
+              margin-top: 2rem;
+              a {
+                font-weight: 400;
+                color: #0085c9;
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+        #newsSection {
+          background-image: linear-gradient(to top, #00000005, #ffffff6f);
+          margin-top: 5rem;
+          .newssection {
+              .newsHead{
+                  padding-left: 1rem;
+              h1 {
+                font-size: 2rem;
+                color: #0085c9;
+                font-weight: 500;
+                margin-bottom: 2rem;
+              }
+              }
+            .newsCard {
+              cursor: pointer;
+              display:flex;
+              flex-direction: column;
+              gap:1rem;
+              .image {
+                  width:100%;
+                  height:250px;
+                  overflow: hidden;
+                  border-radius: 10px;
+                img {
+                  width: 100%;
+                  height:100%;
+                }
+              }
+              &:hover .image{
+                  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+              }
+              h2{
+                  font-size: 1.3rem;
+                  color:#252628;
+              }
+              p{
+                  display:flex;
+                  gap:0.5rem;
+                  align-items: center;
+                  opacity: 0.6;
+                  font-size: 0.9rem;
+              }
+            }
+          }
+        }
+      }
+}
