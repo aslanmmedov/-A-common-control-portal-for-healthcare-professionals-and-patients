@@ -9,11 +9,11 @@ const PatientSchema = new Schema(
     mName: { type: String, required: true },
     birthday: { type: String, required: true },
     fin: { type: String, required: true, unique: true },
-    shadetname: { type: String, required: true },
+    shadetname: { type: String, required: true,unique: true },
     phoneNumber: { type: Number, required: true },
     adress: { type: String, required: true },
     password: { type: String, default: null },
-    email: { type: String, default: null },
+    email: { type: String, default: null,unique: true },
     gender:{type:String,required:true},
     role: { type: String, default: "user" },
     doctorId: {

@@ -7,8 +7,9 @@ const{
     addData,
     deleteDataById,
 } = require("../controllers/PatientController");
+const authMiddleware = require('../middlewares/authMiddleware');
 
-router.get('/',getAllData);
+router.get('/',authMiddleware(["admin"]),getAllData);
 router.get('/:id',getDataByid);
 router.delete('/:id',deleteDataById);
 router.post('/',addData);
