@@ -6,4 +6,9 @@ export const endpoints = {
     hospitals:"hospitals",
     patients:"patients",
     departments:"departments",
+    patient_authentication:"patient_authentication",
+    patient_registiration:"patient_registiration",
+    patient_login:"patient_login",
+    doctor_authentication:"doctor_authentication",
+    doctor_login:"doctor_login"
 }

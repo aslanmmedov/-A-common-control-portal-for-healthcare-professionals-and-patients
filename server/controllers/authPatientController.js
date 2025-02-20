@@ -8,6 +8,12 @@ const patientAuthentication = async (req, res) => {
     const patient = await PatientModel.findOne({
       $or: [{ fin }, { shadetname }],
     });
+    if(!patient){
+      return res.status(200).json({ message: "Fin doğru daxil edilməyib" });
+    }
+    if(patient.password !== null){
+      return res.json({message:"You already have an account!"})
+    }
     res.status(201).json({ data: patient._id, message: "Succes" });
   } catch (error) {
     res.status(400).json({ message: "Bad Request" });
@@ -15,7 +21,8 @@ const patientAuthentication = async (req, res) => {
 };
 
 const registerPatient = async (req, res) => {
-  const { _id, email, password } = req.body;
+  const {id} = req.params;
+  const { email, password } = req.body;  
   try {
     const existPatient = await PatientModel.findOne({ email });
     if (existPatient) {
@@ -23,8 +30,8 @@ const registerPatient = async (req, res) => {
         .status(400)
         .json({ message: "User already exist with this email!" });
     }
-    const hashedPassword = await bcrypt.hash(password, 12);
-    const patient = await PatientModel.findByIdAndUpdate(_id, {
+    const hashedPassword = await bcrypt.hash(password, 12); 
+    const patient = await PatientModel.findByIdAndUpdate(id, {
       ...req.body,
       email,
       password: hashedPassword,
@@ -36,7 +43,7 @@ const registerPatient = async (req, res) => {
 };
 
 const loginPatient = async (req, res) => {
-  const { email, password, role } = req.body;
+  const { email, password } = req.body;
   try {
     const existPatient = await PatientModel.findOne({ email });
     if (
@@ -44,7 +51,6 @@ const loginPatient = async (req, res) => {
       !(await bcrypt.compare(password, existPatient.password))
     ) {
       return res
-        .status(404)
         .json({ message: "Email or Password is not correct" });
     }
 

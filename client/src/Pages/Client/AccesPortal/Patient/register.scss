@@ -1,0 +1,111 @@
+#registerPatient {
+    .registerPatient {
+      width:100%;
+      display:flex;
+      // background-image: url("../public/images/Home/Müayinə.jpg");
+      background-image: linear-gradient(to left, #ffffffb0, #ffffffd1),url("../../../../../public/images/medicine.avif");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      .first-section{ 
+          width: 50%;
+          height: 100vh;
+          display: flex;
+          align-items:center;
+          justify-content: center;
+          flex-direction: column;
+          gap: 1rem;
+          .choiceBox {
+            padding: 0 2rem;
+            display:flex;
+            align-items: flex-start;
+            width:77%;
+            .first {
+              display:flex;
+              align-items: flex-start;
+              justify-content: center;
+              h1 {
+                font-size: 1.8rem;
+                color: #0089cf;
+                letter-spacing: 1px;
+                font-weight: 600;
+              }
+            }
+          }
+          .authBox {
+              width:100%;
+              display:flex;
+              align-items: center;
+              justify-content: center;
+            .auth-form {
+              width:78%;
+              form {
+                background-color: transparent;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                padding: 1rem 2rem;
+                border-radius: 13px;
+                gap: 2rem;
+                .first {
+                  width: 100%;
+                  display: flex;
+                  flex-direction: column;
+                  transition: all 0.6s;
+                  gap:1rem;
+                  .errorMesage{
+                      color:red;
+                  }
+                  .input {
+                    text-align: start;
+                    width: 100%;
+                    border: none;
+                    border-radius: 13px;
+                    background-color: #b5b6ba22;
+                    padding: 1rem 2rem;
+                    outline: none;
+                    color: #0089cf;
+                      font-size: 1rem;
+                      font-weight: 500;
+                    &::placeholder {
+                      color: #0089cf;
+                      font-size: 1rem;
+                      font-weight: 500;
+                    }
+                    
+                  }
+                }
+                .submit {
+                  border: none;
+                  padding: 0.9rem 2rem;
+                  border-radius: 13px;
+                  color: white;
+                  background-color: #0089cf;
+                  font-size: 1rem;
+                  font-weight: 500;
+                  transition: all 0.6s;
+                  cursor: pointer;
+                  &:hover {
+                    color: white;
+                    background-color: #0271a8;
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                  }
+                }
+                .already{
+                  margin-top: 1rem;
+                  a{
+                    color:#0089cf;
+                  }
+                }
+              }
+            }
+          }
+      }
+      .second-section{
+          display:flex;
+          align-items: center;
+          justify-content:flex-start;
+          width:50%;
+      }
+    }
+  }

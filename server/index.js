@@ -7,6 +7,7 @@ const HospitalRouter = require("./routers/HospitalRouter");
 const DepartmentRouter = require("./routers/DepartmentRouter");
 const NewsRouter = require("./routers/NewsRouter");
 const AuthPatientRouter = require("./routers/authPatientRouter");
+const AuthDoctorRouter = require("./routers/authDoctorRouter");
 const app = express()
 const port = 8080
 const path = require("path");
@@ -19,7 +20,8 @@ app.use('/api/doctors', DoctorRouter);
 app.use('/api/hospitals', HospitalRouter);
 app.use('/api/departments', DepartmentRouter);
 app.use('/api/news', NewsRouter);
-app.use('/api/', AuthPatientRouter);
+app.use('/api', AuthPatientRouter);
+app.use('/api', AuthDoctorRouter);
 
 
 app.use(express.static(path.join(__dirname, "images")));
