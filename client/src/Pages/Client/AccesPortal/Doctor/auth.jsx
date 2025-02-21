@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import controller from "../../../../Api/controllers";
 import { endpoints } from "../../../../Api/constants";
 import { useNavigate } from "react-router-dom";
 import "./auth.scss";
+import { AuthContext } from "../../../../Context/AccesContext";
 const AuthWithFin = Yup.object().shape({
   fin: Yup.string()
     .min(6, "Too Short!")
@@ -15,6 +16,8 @@ const AuthDoctor = () => {
   const navigate = useNavigate(null);
   const [UserId, setUserId] = useState("");
   const [condition, setCondition] = useState("");
+
+  const { token, decodedToken, handleLogin, handleLogout } = useContext(AuthContext);
 
   const handleChoice = (c) => {
     setChoice(c);
@@ -29,14 +32,6 @@ const AuthDoctor = () => {
               <div className="first">
                 <h1>Autentifikasiya</h1>
               </div>
-              {/* <div className="second">
-              <button onClick={() => handleChoice("fin")} className="choice choiceOne">
-                Fin ilə doğrulama
-              </button>
-              <button onClick={() => handleChoice("shadetname")} className="choice choiceTwo">
-                Şəhadətnamə ilə doğrulama
-              </button>
-              </div> */}
             </div>
             <div className="authBox">
               <div className="auth-form">

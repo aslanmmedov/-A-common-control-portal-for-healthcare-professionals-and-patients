@@ -7,6 +7,9 @@
     list-style: none;
     font-family: "Poppins", serif;
 }
+body{
+    padding:0 !important;
+}
 .container{
     max-width:1300px;
     margin:0 auto;

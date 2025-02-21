@@ -55,7 +55,7 @@ const loginDoctor = async (req, res) => {
 
     const token = jwt.sign(
       {
-        id:existDoctor._id,role:existDoctor.role
+        id:existDoctor._id,role:existDoctor.role,duty:existDoctor.duty
       },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }

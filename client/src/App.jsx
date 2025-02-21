@@ -12,6 +12,9 @@ import RegisterPatient from './Pages/Client/AccesPortal/Patient/register'
 import LoginDoctor from './Pages/Client/AccesPortal/Doctor/login'
 import RegisterDoctor from './Pages/Client/AccesPortal/Doctor/register'
 import AuthDoctor from './Pages/Client/AccesPortal/Doctor/auth'
+import KabinetPAtient from './Pages/Client/Kabinet/Patient'
+import KabinetDoctor from './Pages/Client/Kabinet/Doctor'
+import KabinetPatient from './Pages/Client/Kabinet/Patient'
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
         </Route>
         <Route path = "/" element = {<ClientLayout/>}>
           <Route index element = {<Home/>}/>
+          <Route path = "patient_kabinet" element = {<KabinetPatient/>}/>
+          <Route path = "doctor_kabinet" element = {<KabinetDoctor/>}/>
         </Route>
         <Route path = "/admin" element = {<AdminLayout/>}>
           <Route index element = {<LoginAdmin/>}/>

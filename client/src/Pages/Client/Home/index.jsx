@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./index.scss";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { FaRegHospital } from "react-icons/fa";
@@ -9,8 +9,18 @@ import { CiCalendarDate } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import controller from "../../../Api/controllers";
 import { endpoints } from "../../../Api/constants";
+import { GoPerson } from "react-icons/go";
+import { FaUserDoctor } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa6";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import Fade from "@mui/material/Fade";
+import Typography from "@mui/material/Typography";
+import { KabinetContext } from "../../../Context/KabinetContext";
 const Home = () => {
   const [news, setNews] = useState([]);
+  const { handleOpen, handleClose, open, setOpen } = useContext(KabinetContext);
 
   const getNewsData = async () => {
     const { data } = await controller.getAllData(endpoints.news);
@@ -20,9 +30,82 @@ const Home = () => {
     getNewsData();
   }, []);
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 900,
+    height: 400,
+    borderRadius: "20px",
+    p: 4,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection:"column",
+    gap: 3,
+    ".link": {
+      border: "none",
+      borderRadius: "25px",
+      p: "2rem 4rem",
+      backgroundColor: "#0474acf2",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap:2,
+      transition:"all 0.6s",
+      "&:hover":{
+        backgroundColor: "#0085c9",
+        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+      },
+      a: {
+        color: "white",
+        fontSize: "1.3rem",
+      },
+      ".person": {
+        color: "white",
+        fontSize: "1.8rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      },
+    },
+  };
+
   return (
     <>
       <main>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          disableScrollLock
+          slots={{ backdrop: Backdrop }}
+          slotProps={{
+            backdrop: {
+              timeout: 500,
+            },
+          }}
+        >
+          <Fade in={open}>
+            <Box sx={style} className="modalKabinet">
+              <div className="link patient">
+                <NavLink to="/patient">Vətəndaş Kimi giriş </NavLink>
+                <p className="person">
+                <FaUser />
+                </p>
+              </div>
+              <div className="link doctor">
+                <NavLink to="/doctor">Tibb işçisi kimi giriş </NavLink>
+                <p className="person">
+                  <FaUserDoctor />
+                </p>
+              </div>
+            </Box>
+          </Fade>
+        </Modal>
         <section id="heroBanner">
           <div className="container">
             <div className="herobanner">

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { endpoints } from "../../../../Api/constants";
 import controller from "../../../../Api/controllers";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./login.scss"
+import { AuthContext } from "../../../../Context/AccesContext";
 const LoginSchema = Yup.object().shape({
   password: Yup.string()
     .min(2, "Too Short!")
@@ -15,6 +16,8 @@ const LoginSchema = Yup.object().shape({
 const LoginDoctor = () => {
   const navigate = useNavigate(null);
   const [message, setMessage] = useState("");
+
+  const { token, decodedToken, handleLogin, handleLogout } = useContext(AuthContext);
 
   return (
     <>
@@ -40,11 +43,9 @@ const LoginDoctor = () => {
                         endpoints.doctor_login,
                         values
                       );
-                      console.log(data);
-                      
                       {
                         data.message !== "Email or Password is not correct"
-                          ? navigate(`/`)
+                          ? handleLogin(data.token,'/')
                           : setMessage(data.message);
                       }
                     } catch (error) {

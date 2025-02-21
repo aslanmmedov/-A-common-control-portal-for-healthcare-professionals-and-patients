@@ -68,7 +68,7 @@ const AuthPatient = () => {
                             }
                             setUserId(null);
                           }
-                          {UserId !== null? navigate(`/access/${data.data}`):null}             
+                          {UserId !== null? navigate(`/patient/${data.data}`):null}             
                         }}
                       >
                         {({ errors, touched }) => (

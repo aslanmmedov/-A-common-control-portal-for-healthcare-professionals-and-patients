@@ -7,22 +7,22 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(Cookies.get("token") || null);
+    const [vezife,setVezife] = useState("patient")
     const [decodedToken, setDecodedToken] = useState(null);
-
     const nav = useNavigate()
-    function handleLogin(value) {
+    function handleLogin(value,navigate) {
         if (!value) return;
-
         try {
             const decoded = jwtDecode(value);
-            console.log(decoded);
-
             const expiresInDays = (decoded.exp * 1000 - Date.now()) / (1000 * 60 * 60 * 24);
-
+            const duty = decoded.duty;
+            if(duty !== null){
+                setVezife(duty);
+            }
             Cookies.set("token", value, { expires: expiresInDays });
             setToken(value);
             setDecodedToken(decoded);
-            nav("/admin")
+            nav(navigate)
         } catch (error) {
             console.error("Invalid token:", error);
             setToken(null);
@@ -37,10 +37,6 @@ const AuthProvider = ({ children }) => {
         Cookies.remove("token");
     }
 
-    // function checkIsTokenValid(){
-
-    // }
-
     useEffect(() => {
         const savedToken = Cookies.get("token");
         if (savedToken) {
@@ -48,11 +44,8 @@ const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    // console.log("Token:", token);
-    // console.log("Decoded Token:", decodedToken);
-
     return (
-        <AuthContext.Provider value={{ token, decodedToken, handleLogin, handleLogout }}>
+        <AuthContext.Provider value={{ token, decodedToken,vezife, handleLogin, handleLogout }}>
             {children}
         </AuthContext.Provider>
     );
