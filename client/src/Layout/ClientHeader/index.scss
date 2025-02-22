@@ -113,6 +113,24 @@
           font-weight: 600;
         }
       }
+      .userInfo{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding:0rem 0rem 1rem 0;
+        img{
+          width:20%;
+        }
+        .info{
+          h2{
+            font-weight: 500;
+            color:#0085C9;
+          }
+          p{
+            color:#919596;
+          }
+        }
+      }
       .menuBar {
         display: none;
       }

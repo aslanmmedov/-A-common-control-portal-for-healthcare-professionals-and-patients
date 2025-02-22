@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiPhone } from "react-icons/fi";
 import { FaRegEnvelope } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
@@ -7,7 +7,8 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
 import "./index.scss";
-import { NavLink } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { NavLink, useLocation } from "react-router-dom";
 import ResponsiveDrawer from "../../Components/Menu";
 // import { GoPerson } from "react-icons/go";
 import { IoPersonOutline } from "react-icons/io5";
@@ -18,12 +19,13 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { IoMdArrowDropdown } from "react-icons/io";
+import controller from "../../Api/controllers";
+import { endpoints } from "../../Api/constants";
 const ClientHeader = () => {
   const { handleOpen, handleClose, open, setOpen } = useContext(KabinetContext);
-  const { token, decodedToken,vezife, handleLogin, handleLogout } =
+  const { token, vezife, handleLogin, handleLogout } =
     useContext(AuthContext);
-    console.log(vezife);
-    
+  const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const ope = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -57,7 +59,22 @@ const ClientHeader = () => {
       color: "#0085C9",
       transition: "all 0.6s",
     },
-  }
+  };
+  const [doctor, setDoctor] = useState([]);
+  const getAllData = async () => {
+    const decoded = jwtDecode(token);
+    const { data } = await controller.getDataById(
+      endpoints.doctors,
+      decoded.id
+    );
+    setDoctor(data);
+  };
+  useEffect(() => {
+    if(token){
+      getAllData();                       
+    }
+  }, []);
+
   return (
     <>
       <header id="clientHeader">
@@ -108,10 +125,33 @@ const ClientHeader = () => {
           <div className="line"></div>
           <div className="container">
             <div className="navDown">
-              <div className="logo">
+              {location.pathname === "/doctor_kabinet" ? (
+                <div className="userInfo">
+                  <img
+                    src={
+                      doctor.gender === "Kişi"
+                        ? "https://cdn-icons-png.flaticon.com/128/4378/4378216.png"
+                        : "https://cdn-icons-png.flaticon.com/128/4378/4378267.png"
+                    }
+                    alt=""
+                  />
+                  <div className="info">
+                    <h2>
+                      {doctor.name} {doctor.surname}
+                    </h2>
+                    <p>{doctor.duty}</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="logo">
+                  <img src="../public/images/Home/SehiyyeLogo.jpg" alt="" />
+                  <h1>E-Poliklinika</h1>
+                </div>
+              )}
+              {/* <div className="logo">
                 <img src="../public/images/Home/SehiyyeLogo.jpg" alt="" />
                 <h1>E-Poliklinika</h1>
-              </div>
+              </div> */}
               <div className="pageLinks">
                 <ul>
                   <li>
@@ -139,7 +179,12 @@ const ClientHeader = () => {
                       aria-expanded={ope ? "true" : undefined}
                       onClick={handleClick}
                     >
-                      <p style={{fontSize:"1.1rem",fontWeight:"500"}}>Kabinet</p> <p style={{fontSize:"1.2rem",marginTop:"5px"}}><IoMdArrowDropdown /></p>
+                      <p style={{ fontSize: "1.1rem", fontWeight: "500" }}>
+                        Kabinet
+                      </p>{" "}
+                      <p style={{ fontSize: "1.2rem", marginTop: "5px" }}>
+                        <IoMdArrowDropdown />
+                      </p>
                     </Button>
                     <Menu
                       id="basic-menu"
@@ -151,8 +196,48 @@ const ClientHeader = () => {
                         "aria-labelledby": "basic-button",
                       }}
                     >
-                      <MenuItem onClick={handleClose}>{vezife === "patient" || vezife === undefined ?<NavLink to = "/patient_kabinet" style={{color:"#0085C9"}}>Kabinet</NavLink>:<NavLink to = "/doctor_kabinet" style={{color:"#0085C9"}}>Kabinet</NavLink>}</MenuItem>
-                      <MenuItem sx = {style} onClick={handleClose}><button style = {{border:"none",display:"flex",alignItems:"center",backgroundColor:"transparent"}}onClick={handleLogout} className='logout'><p><IoMdExit /></p><h5>Çıxış</h5></button></MenuItem>
+                      {location.pathname !== "/" ? (
+                        <MenuItem onClick={handleClose}>
+                          <NavLink to="/" style={{ color: "#0085C9" }}>
+                            Home
+                          </NavLink>
+                        </MenuItem>
+                      ) : (
+                        <MenuItem onClick={handleClose}>
+                          {vezife === "patient" || vezife === undefined ? (
+                            <NavLink
+                              to="/patient_kabinet"
+                              style={{ color: "#0085C9" }}
+                            >
+                              Kabinet
+                            </NavLink>
+                          ) : (
+                            <NavLink
+                              to="/doctor_kabinet"
+                              style={{ color: "#0085C9" }}
+                            >
+                              Kabinet
+                            </NavLink>
+                          )}
+                        </MenuItem>
+                      )}
+                      <MenuItem sx={style} onClick={handleClose}>
+                        <button
+                          style={{
+                            border: "none",
+                            display: "flex",
+                            alignItems: "center",
+                            backgroundColor: "transparent",
+                          }}
+                          onClick={handleLogout}
+                          className="logout"
+                        >
+                          <p>
+                            <IoMdExit />
+                          </p>
+                          <h5>Çıxış</h5>
+                        </button>
+                      </MenuItem>
                     </Menu>
                   </div>
                 )}

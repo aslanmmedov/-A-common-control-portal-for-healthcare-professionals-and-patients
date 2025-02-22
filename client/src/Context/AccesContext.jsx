@@ -7,8 +7,8 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(Cookies.get("token") || null);
-    const [vezife,setVezife] = useState("patient")
-    const [decodedToken, setDecodedToken] = useState(null);
+    const [vezife,setVezife] = useState("patient");
+    const [decodedToken, setDecodedToken] = useState(null); 
     const nav = useNavigate()
     function handleLogin(value,navigate) {
         if (!value) return;
@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
             setDecodedToken(decoded);
             nav(navigate)
         } catch (error) {
-            console.error("Invalid token:", error);
+            console.log("Invalid token:", error);
             setToken(null);
             setDecodedToken(null);
             Cookies.remove("token");
@@ -35,6 +35,7 @@ const AuthProvider = ({ children }) => {
         setToken(null);
         setDecodedToken(null);
         Cookies.remove("token");
+        nav("/");
     }
 
     useEffect(() => {

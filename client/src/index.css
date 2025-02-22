@@ -6,6 +6,7 @@
     text-decoration: none;
     list-style: none;
     font-family: "Poppins", serif;
+    outline: none;
 }
 body{
     padding:0 !important;
@@ -26,8 +27,16 @@ body{
     width:calc(100% / 12 * 4);
     padding:1rem;
 }
+.col-5{
+    width:calc(100% / 12 * 5);
+    padding:1rem;
+}
 .col-6{
     width:calc(100% / 12 * 6);
+    padding:1rem;
+}
+.col-7{
+    width:calc(100% / 12 * 7);
     padding:1rem;
 }
 .col-12{

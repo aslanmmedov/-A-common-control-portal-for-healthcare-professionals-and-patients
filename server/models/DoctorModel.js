@@ -14,6 +14,7 @@ const DoctorSchema = new Schema(
     password: { type: String, default:null },
     role: { type: String, default: "user" },
     gender:{type:String,required:true},
+    image: { type: String, required: true },
     duty: { type: String, require: true },
     dateOfEmployment: { type: String, required: true },
     workHours: { type: String, required: true },
