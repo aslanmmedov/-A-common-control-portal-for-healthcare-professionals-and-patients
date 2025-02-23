@@ -106,7 +106,7 @@ const AuthPatient = () => {
                             endpoints.patient_authentication,
                             values
                           );
-                          {!data ? setUserId(null) :navigate(`${data}`)}
+                          {!data ? setUserId(null) :navigate(`/patient/${data}`)}
                         }}
                       >
                         {({ errors, touched }) => (

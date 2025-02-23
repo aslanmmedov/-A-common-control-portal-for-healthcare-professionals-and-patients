@@ -10,8 +10,7 @@ const getAllData = async (req, res) => {
 }
 const addData = async (req, res) => {
     try {
-        const imageName = req.file.filename;
-        const doctor =  DoctorModel({...req.body,image: `http://localhost:8080/${imageName}`});
+        const doctor =  DoctorModel({...req.body});
         await doctor.save();
         res.status(201).json({data:doctor,message:"Succes"})
     } catch (error) {

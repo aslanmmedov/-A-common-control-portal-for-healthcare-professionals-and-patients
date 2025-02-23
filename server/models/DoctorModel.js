@@ -14,12 +14,18 @@ const DoctorSchema = new Schema(
     password: { type: String, default:null },
     role: { type: String, default: "user" },
     gender:{type:String,required:true},
-    image: { type: String, required: true },
     duty: { type: String, require: true },
     dateOfEmployment: { type: String, required: true },
     workHours: { type: String, required: true },
     hospitalId: { type: mongoose.Schema.Types.ObjectId, ref: "Hospitals" },
     departmentId: { type: mongoose.Schema.Types.ObjectId, ref: "Departments" },
+    messages:[
+      {
+        message:{type:String,default:null},
+        date:{type:Date,default:null},
+        sendByWho:{type:String,default:null}
+      }
+    ]
   },
   { versionKey: false, timestamps: true }
 );

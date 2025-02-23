@@ -14,7 +14,7 @@ const addData = async (req, res) => {
         await patients.save();
         res.status(201).json({data:patients,message:"Succes"})
     } catch (error) {
-        res.status(400).json({message:"Bad Request"})
+        res.status(400).json({message:error})
     }
 }
 const getDataByid = async (req, res) => {
