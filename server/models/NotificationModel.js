@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const NotificationSchema = new Schema(
   {
     name: { type: String, required: true },
-    type:{type:String,required:true}
+    type:{type:String,required:true},
+    hospitalId:{type:String,required:true}
   },
   { versionKey: false, timestamps: true }
 );

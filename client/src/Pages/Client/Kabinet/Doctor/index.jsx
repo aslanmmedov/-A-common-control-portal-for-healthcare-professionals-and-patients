@@ -7,7 +7,9 @@ import { AuthContext } from "../../../../Context/AccesContext";
 import { DoctorsContext } from "../../../../Context/DoctorsContext";
 import { HospitalsContext } from "../../../../Context/HospitalsContext";
 import controller from "../../../../Api/controllers";
+import { IoIosNotificationsOutline } from "react-icons/io";
 import { endpoints } from "../../../../Api/constants";
+import { CgDanger } from "react-icons/cg";
 import "./index.scss";
 
 const KabinetDoctor = () => {
@@ -18,7 +20,8 @@ const KabinetDoctor = () => {
   const [doctor, setDoctor] = useState(null);
   const [partner, setPartner] = useState(null);
   const [hospital, setHospital] = useState(null);
-  const [patient, setPatient] = useState(null);
+  const [news, setNews] = useState(null);
+  const [notifications, setNotifications] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
@@ -28,16 +31,15 @@ const KabinetDoctor = () => {
 
     const fetchData = async () => {
       try {
-        const [doctorRes, patientRes] = await Promise.all([
+        const [doctorRes, doctorNews, ntfctions] = await Promise.all([
           controller.getDataById(endpoints.doctors, decoded.id),
-          controller.getDataById(
-            endpoints.patients,
-            "67ba598a85079d8be9f489c0"
-          ),
+          controller.getAllData(endpoints.d_news),
+          controller.getAllData(endpoints.notifications),
         ]);
 
         setDoctor(doctorRes.data);
-        setPatient(patientRes.data);
+        setNews(doctorNews.data);
+        setNotifications(ntfctions.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -45,7 +47,6 @@ const KabinetDoctor = () => {
 
     fetchData();
   }, [token]);
-
   useEffect(() => {
     if (doctor && doctors.length > 0) {
       setPartner(
@@ -63,36 +64,42 @@ const KabinetDoctor = () => {
   return (
     <main id="doctor_kabinet">
       <div className="container">
-        <div className="head">
-          <div className="sideBar">
-            <div className="relative">
-              <div className="btnOpen">
-              <button onClick={()=>{isOpen === true?setIsOpen(false):setIsOpen(true)}}>Close</button>
-              </div>
-              <motion.div
-                initial={{ x: "-100%" }}
-                animate={{ x: isOpen ? "0%" : "-100%" }}
-                transition={{ type: "tween", duration: 0.3 }}
-                className="left-0 top-0 w-64 bg-white shadow-lg z-50 p-4"
+        <div className="sideBar">
+          <div className="relative">
+            <div className="btnOpen">
+              <button
+                onClick={() => {
+                  isOpen === true ? setIsOpen(false) : setIsOpen(true);
+                }}
               >
-                <ul className="space-y-4">
-                  {[
-                    "Ümumi Nəzarət",
-                    "Pasiyentlər",
-                    "Müraciətlər",
-                    "Xəbərlər",
-                    "Bildirişlər",
-                  ].map((item) => (
-                    <li key={item}>
-                      <button className="menu-btn">
-                        {item} <FaArrowRightLong />
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+                Close
+              </button>
             </div>
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: isOpen ? "0%" : "-100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              className="left-0 top-0 w-64 bg-white shadow-lg z-50 p-4"
+            >
+              <ul className="space-y-4">
+                {[
+                  "Ümumi Nəzarət",
+                  "Pasiyentlər",
+                  "Müraciətlər",
+                  "Xəbərlər",
+                  "Bildirişlər",
+                ].map((item) => (
+                  <li key={item}>
+                    <button className="menu-btn">{item}</button>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
           </div>
+        </div>
+      </div>
+      <div className="container">
+        <div className="headDoctorKabinet">
           <div className="mainSec">
             <div className="row">
               {/* Doctor Profile */}
@@ -129,7 +136,7 @@ const KabinetDoctor = () => {
                       İş saatları: <span>{doctor?.workHours || "N/A"}</span>
                     </p>
                     <p>
-                      Poliklinika Adı: <span>{hospital?.name || "N/A"}</span>
+                      Poliklinika Adı: <span>{hospital?.name || "N/A"}ı</span>
                     </p>
                   </div>
                 </div>
@@ -184,8 +191,7 @@ const KabinetDoctor = () => {
             </div>
           </div>
         </div>
-
-        <div className="body">
+        <div className="bodyDoctorKabinet">
           {/* <br />
           {patient?.checkupHistory?.length > 0 ? (
             <ul>
@@ -200,14 +206,70 @@ const KabinetDoctor = () => {
           ) : (
             <p>No checkup history available.</p>
           )} */}
-        <div className="row">
-          <div className="col-6 col-md-12 col-sm-12">
-            <div className="vaccineGraph">
-              
+          <div className="row">
+            <div className="col-6 col-md-12 col-sm-12">
+              <div className="newsDoctor">
+                <h2>Xəbərlər</h2>
+                {news ? (
+                  news.map((n) => (
+                    <div className="news" key={n._id}>
+                      <div className="content">
+                        <div className="img">
+                          <img src={n.image} alt={n.name} />
+                        </div>
+                        <div className="text">
+                          <p>{n.name}</p>
+                        </div>
+                      </div>
+                      <div className="actions">
+                        <button className="btnAction">Detallar</button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p>Heç bir xəbər yoxdur</p>
+                )}
+              </div>
+            </div>
+            <div className="col-6 col-md-12 col-sm-12">
+              <div className="notificationDoctor">
+                <h2>Bildirişlər</h2>
+                {notifications ? (
+                  notifications.map((n) =>
+                    n.hospitalId === hospital?._id ? (
+                      <div className="notif" key={n._id}>
+                        <div className="content">
+                          <div className="text">
+                            <p>
+                              {n.type === "All" ? (
+                                <i>
+                                  <CgDanger />
+                                </i>
+                              ) : (
+                                <i className="sec">
+                                  <IoIosNotificationsOutline />
+                                </i>
+                              )}
+                              {n.name}
+                            </p>
+                          </div>
+                        </div>
+                        <div
+                          className={n.type === "All" ? "actions" : "personal"}
+                        >
+                          <p className="btnAction">
+                            {n.type === "All" ? "Hərkəs" : `${n.type}`}
+                          </p>
+                        </div>
+                      </div>
+                    ) : null
+                  )
+                ) : (
+                  <p>Heç bir bildiriş yoxdur</p>
+                )}
+              </div>
             </div>
           </div>
-          <div className="col-6 col-md-12 col-sm-12"></div>
-        </div>
         </div>
       </div>
     </main>

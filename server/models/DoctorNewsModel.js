@@ -5,6 +5,7 @@ const DoctorNewsSchema = new Schema(
   {
     name: { type: String, required: true },
     description:{type:String,required:true},
+    image:{type:String,required:true},
     date:{type:Date,default:new Date()}
   },
   { versionKey: false, timestamps: true }

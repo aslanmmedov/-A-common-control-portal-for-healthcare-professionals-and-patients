@@ -10,5 +10,7 @@ export const endpoints = {
     patient_registiration:"patient_registiration",
     patient_login:"patient_login",
     doctor_authentication:"doctor_authentication",
-    doctor_login:"doctor_login"
+    doctor_login:"doctor_login",
+    d_news:"d_news",
+    notifications:"notifications"
 }
