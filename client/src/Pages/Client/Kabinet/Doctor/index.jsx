@@ -17,9 +17,10 @@ import { BsFillPersonCheckFill } from "react-icons/bs";
 import { MdOutlineDoNotDisturb } from "react-icons/md";
 import { PatientsContext } from "../../../../Context/PatientsContext";
 import { useNavigate } from "react-router-dom";
-
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 const KabinetDoctor = () => {
-  const navigate = useNavigate(null)
+  const navigate = useNavigate(null);
   const { token } = useContext(AuthContext);
   const { doctors } = useContext(DoctorsContext);
   const { hospitals } = useContext(HospitalsContext);
@@ -79,6 +80,18 @@ const KabinetDoctor = () => {
     }
   }, [doctor, doctors, hospitals, partner, patients]);
 
+  const AddNotifSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    type: Yup.string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    hospitalId: Yup.string().required("Required"),
+  });
+
   // const handlePatient = (id) => {
   //   console.log("id",id);
   //   if(matchPatients){
@@ -100,9 +113,12 @@ const KabinetDoctor = () => {
       setCurrentPatient(found && found);
     }
   };
+  const deleteNotification = async (id) => {
+    await controller.deleteDataById(endpoints.notifications, id);
+  };
   const getDetail = (id) => {
     navigate(`/${id}`);
-  }
+  };
   return (
     <main id="doctor_kabinet">
       <div className="container">
@@ -136,27 +152,33 @@ const KabinetDoctor = () => {
                     Ümumi Nəzarət
                   </button>
                 </li>
-                <li>
-                  <button
-                    className={
-                      Page === "PA" ? "menu-btn menu-btn-i" : "menu-btn"
-                    }
-                    onClick={() => {
-                      setPage("PA");
-                    }}
-                  >
-                    Pasiyentlər
-                  </button>
-                </li>
-                {/* <li>
-                  <button
-                    className={
-                      Page === "AP" ? "menu-btn menu-btn-i" : "menu-btn"
-                    }
-                    onClick={()=>{setPage("AP")}}>
-                    Müraciətlər
-                  </button>
-                </li> */}
+                {doctor?.duty === "Baş Həkim" ? (
+                  <li>
+                    <button
+                      className={
+                        Page === "PA" ? "menu-btn menu-btn-i" : "menu-btn"
+                      }
+                      onClick={() => {
+                        setPage("İŞ");
+                      }}
+                    >
+                      İşçilər
+                    </button>
+                  </li>
+                ) : (
+                  <li>
+                    <button
+                      className={
+                        Page === "PA" ? "menu-btn menu-btn-i" : "menu-btn"
+                      }
+                      onClick={() => {
+                        setPage("PA");
+                      }}
+                    >
+                      Pasiyentlər
+                    </button>
+                  </li>
+                )}
                 <li>
                   <button
                     className={
@@ -191,8 +213,20 @@ const KabinetDoctor = () => {
           <div className="headDoctorKabinet">
             <div className="mainSec">
               <div className="row">
-                <div className="col-7 col-md-12 col-sm-12">
-                  <div className="ownProfile">
+                <div
+                  className={
+                    doctor?.duty === "Baş Həkim"
+                      ? "col-12 col-md-12 col-sm-12"
+                      : "col-7 col-md-12 col-sm-12"
+                  }
+                >
+                  <div
+                    className={
+                      doctor?.duty === "Baş Həkim"
+                        ? "ownProfileB"
+                        : "ownProfile"
+                    }
+                  >
                     <div className="imgName">
                       <div className="img">
                         <img
@@ -217,6 +251,12 @@ const KabinetDoctor = () => {
                         Email: <span>{doctor?.email || "N/A"}</span>
                       </p>
                       <p>
+                        FIN: <span>{doctor?.fin || "N/A"}</span>
+                      </p>
+                      <p>
+                        Adress: <span>{doctor?.adress || "N/A"}</span>
+                      </p>
+                      <p>
                         İşə qəbul tarixi:{" "}
                         <span>{doctor?.dateOfEmployment || "N/A"}</span>
                       </p>
@@ -227,10 +267,54 @@ const KabinetDoctor = () => {
                         Poliklinika Adı: <span>{hospital?.name || "N/A"}ı</span>
                       </p>
                     </div>
+                    {doctor?.duty === "Baş Həkim" ? (
+                      <div className="sendNotifcation">
+                        <h2>Bildiriş Əlavə edin</h2>
+                        <div className="form">
+                          <Formik
+                            initialValues={{
+                              name: "",
+                              type: "",
+                              hospitalId: doctor?.hospitalId || "",
+                            }}
+                            validationSchema={AddNotifSchema}
+                            onSubmit={async (values) => {
+                              const data = await controller.addNewData(
+                                endpoints.notifications,
+                                values
+                              );
+                            }}
+                          >
+                            {({ errors, touched }) => (
+                              <Form>
+                                <Field
+                                  name="name"
+                                  placeholder="Bildiriş mətnini daxil edin"
+                                />
+                                {errors.name && touched.name ? (
+                                  <div>{errors.name}</div>
+                                ) : null}
+                                <Field as="select" name="type">
+                                  <option value="All">Hərkəs</option>
+                                  <option value="Tibb Bacısı">
+                                    Tibb Bacısı
+                                  </option>
+                                  <option value="Həkim">Həkim</option>
+                                </Field>
+                                {errors.type && touched.type ? (
+                                  <div>{errors.type}</div>
+                                ) : null}
+                                <button type="submit">Əlavə et</button>
+                              </Form>
+                            )}
+                          </Formik>
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
                 </div>
 
-                {partner && (
+                {partner && doctor?.duty !== "Baş Həkim" && (
                   <div className="col-5 col-md-12 col-sm-12">
                     <div className="PR">
                       <div className="partnerProfile">
@@ -368,6 +452,64 @@ const KabinetDoctor = () => {
                     <p>Heç bir bildiriş yoxdur</p>
                   )}
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {Page === "İŞ" && (
+        <div className="container">
+          <div className="headDoctorKabinet">
+            <div className="mainSec">
+              <div className="row">
+                {doctors?.map((doctor) => (
+                  <div className="col-6 col-md-12 col-sm-12">
+                    <div className="ownProfile">
+                      <div className="imgName">
+                        <div className="img">
+                          <img
+                            src={
+                              doctor?.gender === "Kişi"
+                                ? "https://pngimg.com/d/doctor_PNG15980.png"
+                                : "https://purepng.com/public/uploads/thumbnail/purepng.com-doctordoctorsdoctors-and-nursesclinicianmedical-practitionernotepadfemale-1421526857221xttxe.png"
+                            }
+                            alt="Doctor"
+                          />
+                        </div>
+                        <h2>
+                          {doctor?.name} {doctor?.surname} {doctor?.fName}{" "}
+                          {doctor?.gender === "Kişi" ? "oğlu" : "qızı"}
+                        </h2>
+                      </div>
+                      <div className="about">
+                        <p>
+                          Vəzifə: <span>{doctor?.duty || "N/A"}</span>
+                        </p>
+                        <p>
+                          Email: <span>{doctor?.email || "N/A"}</span>
+                        </p>
+                        <p>
+                          FIN: <span>{doctor?.fin || "N/A"}</span>
+                        </p>
+                        <p>
+                          Adress: <span>{doctor?.adress || "N/A"}</span>
+                        </p>
+                        <p>
+                          İşə qəbul tarixi:{" "}
+                          <span>{doctor?.dateOfEmployment || "N/A"}</span>
+                        </p>
+                        <p>
+                          İş saatları: <span>{doctor?.workHours || "N/A"}</span>
+                        </p>
+                        <p>
+                          Poliklinika Adı:{" "}
+                          <span>{hospital?.name || "N/A"}ı</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
               </div>
             </div>
           </div>
@@ -592,7 +734,14 @@ const KabinetDoctor = () => {
                         </div>
                         <div className="actions">
                           <p>{n.date}</p>
-                          <button className="btnAction" onClick={() => {getDetail(n._id)}}>Detallar</button>
+                          <button
+                            className="btnAction"
+                            onClick={() => {
+                              getDetail(n._id);
+                            }}
+                          >
+                            Detallar
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -640,6 +789,15 @@ const KabinetDoctor = () => {
                             <p className="btnAction">
                               {n.type === "All" ? "Hərkəs" : `${n.type}`}
                             </p>
+                            {doctor?.duty === "Baş Həkim" ? (
+                              <button
+                                onClick={() => {
+                                  deleteNotification(n._id);
+                                }}
+                              >
+                                Silin
+                              </button>
+                            ) : null}
                           </div>
                         </div>
                       </div>

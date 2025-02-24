@@ -8,7 +8,8 @@ const{
     AddVaccine,
     AddAppeals,
     deleteMessage,
-    deletePrescription
+    deletePrescription,
+    deleteAppeal
 } = require("../controllers/WorkWithPatientInfoController");
 
 router.put('/p/:id',addMessage);
@@ -18,6 +19,7 @@ router.put('/p/:id',AddVaccine);
 router.put('/p/:id',AddAppeals);
 router.put('/p/:id',deleteMessage);
 router.put('/p/:id',deletePrescription);
+router.put('/p/:id',deleteAppeal);
 
 
 

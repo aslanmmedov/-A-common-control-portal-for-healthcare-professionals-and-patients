@@ -39,6 +39,7 @@ function App() {
         </Route>
         <Route path = "/admin" element = {<AdminLayout/>}>
           <Route index element = {<LoginAdmin/>}/>
+          <Route path = "dashboard" element = {<AdminDashboard/>}/>
         </Route>
       </Routes>
     </>

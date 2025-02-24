@@ -9,6 +9,7 @@ const NewsRouter = require("./routers/NewsRouter");
 const AuthPatientRouter = require("./routers/authPatientRouter");
 const PatientMessage = require("./routers/WorkWithPatientInfoRouter");
 const AuthDoctorRouter = require("./routers/authDoctorRouter");
+const LoginAdminRouter = require("./routers/adminRouter");
 const NotificationRouter = require("./routers/NotificationRouter");
 const DoctorNewsRouter = require("./routers/DoctorNewsRouter");
 const app = express()
@@ -27,7 +28,8 @@ app.use('/api/notifications',NotificationRouter)
 app.use('/api/d_news',DoctorNewsRouter)
 app.use('/api', AuthPatientRouter);
 app.use('/api', AuthDoctorRouter);
-app.use('/api/message',PatientMessage)
+app.use('/api/admin', LoginAdminRouter);
+app.use('/api/',PatientMessage)
 
 app.use(express.static(path.join(__dirname, "images")));
 app.use(express.static(path.join(__dirname, "documents")));

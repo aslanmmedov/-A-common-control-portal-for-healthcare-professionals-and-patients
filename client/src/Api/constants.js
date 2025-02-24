@@ -12,5 +12,6 @@ export const endpoints = {
     doctor_authentication:"doctor_authentication",
     doctor_login:"doctor_login",
     d_news:"d_news",
-    notifications:"notifications"
+    notifications:"notifications",
+    admin_login:"admin/admin_login"
 }

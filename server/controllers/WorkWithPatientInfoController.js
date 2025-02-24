@@ -187,4 +187,29 @@ const deletePrescription = async (req, res) => {
       res.status(400).json({ message: error });
     }
   };
-module.exports = {addMessage,addPrescription,addCheckupHistory,AddVaccine,AddAppeals,deleteMessage,deletePrescription}
+  const deleteAppeal = async (req, res) => {
+    const {id} = req.params;
+    const { messageId } = req.body;
+  
+    try {
+      const updatedPatient = await PatientModel.findByIdAndUpdate(
+        id,
+        {
+          $pull: { appeals: { _id: messageId } }
+        },
+        { new: true }
+      );
+  
+      if (!updatedPatient) {
+        return res.status(404).json({ message: "Patient not found!" });
+      }
+  
+      res.json({
+        message: "Message deleted successfully",
+        updatedPatient: updatedPatient,
+      });
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  };
+module.exports = {addMessage,addPrescription,addCheckupHistory,AddVaccine,AddAppeals,deleteMessage,deletePrescription,deleteAppeal}
