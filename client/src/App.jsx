@@ -15,6 +15,7 @@ import AuthDoctor from './Pages/Client/AccesPortal/Doctor/auth'
 import KabinetPAtient from './Pages/Client/Kabinet/Patient'
 import KabinetDoctor from './Pages/Client/Kabinet/Doctor'
 import KabinetPatient from './Pages/Client/Kabinet/Patient'
+import NewsDetail from './Pages/Client/Kabinet/Doctor/newsDetail/newsDetail'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         </Route>
         <Route path = "/" element = {<ClientLayout/>}>
           <Route index element = {<Home/>}/>
+          <Route path = ":id" element = {<NewsDetail/>}/>
           <Route path = "patient_kabinet" element = {<KabinetPatient/>}/>
           <Route path = "doctor_kabinet" element = {<KabinetDoctor/>}/>
         </Route>
