@@ -10,12 +10,12 @@ const getAllData = async (req, res) => {
 }
 const addData = async (req, res) => {
     try {
-        const imageName = req.file.filename;
-        const News =  NewsModel({...req.body,image: `http://localhost:8080/${imageName}`,});
+        const imageName = req.file.filename;     
+        const News =  NewsModel({...req.body,image: `http://localhost:8080/${imageName}`});
         await News.save();
         res.status(201).json({data:News,message:"Succes"})
     } catch (error) {
-        res.status(400).json({message:"Bad Request"})
+        res.status(400).json({message:error.message})
     }
 }
 const getDataByid = async (req, res) => {
@@ -36,10 +36,26 @@ const deleteDataById = async (req, res) => {
         res.status(404).json({message:"Not Found"})
     }
 }
+const UpdateDataById = async (req, res) => {
+    const {id} = req.params;
+    try {
+        const imageName = req.file.filename; 
+        const News = await NewsModel.findByIdAndUpdate(id,{...req.body,image: `http://localhost:8080/${imageName}`});
+        if (!News) {
+            return res.status(404).json({
+              message: "user not found!",
+            });
+          }
+        res.status(200).json({data:News,message:"Succes"})
+    } catch (error) {
+        res.status(404).json({message:error.message})
+    }
+}
 
 module.exports = {
     getAllData,
     getDataByid,
     addData,
     deleteDataById,
+    UpdateDataById
 }

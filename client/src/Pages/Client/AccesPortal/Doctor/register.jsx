@@ -58,6 +58,7 @@ const RegisterDoctor = () => {
                           name="password"
                           placeholder="Giriş parolu təyin edin"
                           className="input"
+                          type = "password"
                         />
                         {errors.password && touched.password ? (
                           <div className="errorMesage">{errors.password}</div>

@@ -9,9 +9,19 @@ const NewsDetail = () => {
   const navigate = useNavigate(null);
 
   const getData = async () => {
-    const data = await controller.getDataById(endpoints.d_news, id);
-    setNews(data.data);
+    const dNews = await controller.getDataById(endpoints.d_news, id);
+    const News = await controller.getDataById(endpoints.news, id);
+    if(dNews.data){
+      return setNews(dNews.data);
+    }
+    setNews(News.data);
   };
+  console.log(news);
+  
+  // const getData = async () => {
+  //   const data = await controller.getDataById(endpoints.d_news, id);
+  //   setNews(data.data);
+  // };
 
   useEffect(() => {
     getData();

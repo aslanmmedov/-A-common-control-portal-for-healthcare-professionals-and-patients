@@ -8,11 +8,12 @@ const{
     deleteDataById,
     UpdateDataById
 } = require("../controllers/DoctorNewsController");
+const { newsImageUpload } = require('../middlewares/imageUploadMulter');
 
 router.get('/',getAllData);
 router.get('/:id',getDataByid);
 router.delete('/:id',deleteDataById);
-router.post("/",addData);
-router.put("/:id",UpdateDataById)
+router.post("/",newsImageUpload.single("image"),addData);
+router.put("/:id",newsImageUpload.single("image"),UpdateDataById)
 
 module.exports = router;

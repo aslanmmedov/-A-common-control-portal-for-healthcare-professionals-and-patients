@@ -16,6 +16,7 @@ import KabinetPAtient from './Pages/Client/Kabinet/Patient'
 import KabinetDoctor from './Pages/Client/Kabinet/Doctor'
 import KabinetPatient from './Pages/Client/Kabinet/Patient'
 import NewsDetail from './Pages/Client/Kabinet/Doctor/newsDetail/newsDetail'
+import AboutPage from './Pages/Client/About'
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path = "/" element = {<ClientLayout/>}>
           <Route index element = {<Home/>}/>
           <Route path = ":id" element = {<NewsDetail/>}/>
+          <Route path = "about_us" element = {<AboutPage/>}/>
           <Route path = "patient_kabinet" element = {<KabinetPatient/>}/>
           <Route path = "doctor_kabinet" element = {<KabinetDoctor/>}/>
         </Route>

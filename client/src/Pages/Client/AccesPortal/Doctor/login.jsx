@@ -67,6 +67,7 @@ const LoginDoctor = () => {
                         <Field name="password" 
                         placeholder="Giriş parolunu daxil edin!"
                         className = "input"
+                        type = "password"
                         />
                         {errors.password && touched.password ? (
                           <div className="errorMesage">{errors.password}</div>

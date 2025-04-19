@@ -57,6 +57,7 @@ const RegisterPatient = () => {
                           name="password"
                           placeholder="Giriş parolu təyin edin"
                           className="input"
+                          type = "password"
                         />
                         {errors.password && touched.password ? (
                           <div className="errorMesage">{errors.password}</div>
@@ -77,10 +78,7 @@ const RegisterPatient = () => {
             </div>
           </div>
           <div className="second-section">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Logo_of_the_Ministry_of_Healthcare_of_Azerbaijan.png"
-              alt=""
-            />
+            <NavLink to = "/"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Logo_of_the_Ministry_of_Healthcare_of_Azerbaijan.png" alt="" /></NavLink>
           </div>
         </div>
       </section>

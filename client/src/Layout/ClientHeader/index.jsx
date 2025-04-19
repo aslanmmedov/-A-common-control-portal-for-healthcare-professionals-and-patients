@@ -23,7 +23,7 @@ import controller from "../../Api/controllers";
 import { endpoints } from "../../Api/constants";
 const ClientHeader = () => {
   const { handleOpen, handleClose, open, setOpen } = useContext(KabinetContext);
-  const { token, decodedToken,vezife, handleLogin, handleLogout } =
+  const { token, decodedToken, vezife, handleLogin, handleLogout } =
     useContext(AuthContext);
   const location = useLocation();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -70,8 +70,8 @@ const ClientHeader = () => {
     setDoctor(data);
   };
   useEffect(() => {
-    if(token){
-      getAllData();                       
+    if (token) {
+      getAllData();
     }
   }, []);
 
@@ -155,7 +155,11 @@ const ClientHeader = () => {
               <div className="pageLinks">
                 <ul>
                   <li>
-                    <NavLink to="/">Haqqımızda</NavLink>
+                    <NavLink to="/">Ev</NavLink>
+                    <p></p>
+                  </li>
+                  <li>
+                    <NavLink to="/about_us">Haqqımızda</NavLink>
                     <p></p>
                   </li>
                   <li>

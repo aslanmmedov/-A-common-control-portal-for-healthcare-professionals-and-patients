@@ -10,7 +10,8 @@ const getAllData = async (req, res) => {
 }
 const addData = async (req, res) => {
     try {
-        const doctorNews =  DoctorNewsModel({...req.body});
+        const imageName = req.file.filename; 
+        const doctorNews =  DoctorNewsModel({...req.body,image: `http://localhost:8080/${imageName}`});
         await doctorNews.save();
         res.status(201).json({data:doctorNews,message:"Succes"})
     } catch (error) {
@@ -38,7 +39,8 @@ const deleteDataById = async (req, res) => {
 const UpdateDataById = async (req, res) => {
     const {id} = req.params;
     try {
-        const doctorNews = await DoctorNewsModel.findByIdAndUpdate(id,{...req.body});
+        const imageName = req.file.filename; 
+        const doctorNews = await DoctorNewsModel.findByIdAndUpdate(id,{...req.body,image: `http://localhost:8080/${imageName}`});
         if (!doctorNews) {
             return res.status(404).json({
               message: "user not found!",
@@ -46,7 +48,7 @@ const UpdateDataById = async (req, res) => {
           }
         res.status(200).json({data:doctorNews,message:"Succes"})
     } catch (error) {
-        res.status(404).json({message:"Not Found"})
+        res.status(404).json({message:error.message})
     }
 }
 

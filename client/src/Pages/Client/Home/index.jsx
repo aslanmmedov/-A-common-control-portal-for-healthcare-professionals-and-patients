@@ -6,7 +6,7 @@ import { MdPersonAddAlt } from "react-icons/md";
 import { MdOutlineMedicalServices } from "react-icons/md";
 import { Counter } from "../../../Components/otoCounter";
 import { CiCalendarDate } from "react-icons/ci";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import controller from "../../../Api/controllers";
 import { endpoints } from "../../../Api/constants";
 import { GoPerson } from "react-icons/go";
@@ -19,6 +19,7 @@ import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
 import { KabinetContext } from "../../../Context/KabinetContext";
 const Home = () => {
+  const navigate = useNavigate(null);
   const [news, setNews] = useState([]);
   const { handleOpen, handleClose, open, setOpen } = useContext(KabinetContext);
 
@@ -72,6 +73,9 @@ const Home = () => {
     },
   };
 
+  const getDetail = (id) => {
+    navigate(`/${id}`);
+  };
   return (
     <>
       <main>
@@ -226,7 +230,9 @@ const Home = () => {
               <div className="row">
                 {news &&
                   news.map((news) => (
-                    <div className="col-4 col-sm-12 col-sm-12" key={news.id}>
+                    <div className="col-4 col-sm-12 col-sm-12" key={news._id} onClick={() => {
+                      getDetail(news._id);
+                    }}>
                       <div className="newsCard">
                         <div className="image">
                           <img src={news.image} alt="" />

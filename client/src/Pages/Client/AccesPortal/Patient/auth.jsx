@@ -3,7 +3,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import controller from "../../../../Api/controllers";
 import { endpoints } from "../../../../Api/constants";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./auth.scss"
 const AuthWithFin = Yup.object().shape({
   fin: Yup.string()
@@ -135,7 +135,7 @@ const AuthPatient = () => {
             </div>
             </div>
             <div className="second-section">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Logo_of_the_Ministry_of_Healthcare_of_Azerbaijan.png" alt="" />
+              <NavLink to = "/"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Logo_of_the_Ministry_of_Healthcare_of_Azerbaijan.png" alt="" /></NavLink>
             </div>
           </div>
       </section>

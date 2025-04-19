@@ -6,7 +6,7 @@ const NewsSchema = new Schema(
   {
     name: { type: String, required: true },
     image: { type: String, required: true },
-    date:{type:String,required:true},
+    date:{type:Date,default:new Date()},
     news:{type:String,required:true} 
   },
   { versionKey: false, timestamps: true }

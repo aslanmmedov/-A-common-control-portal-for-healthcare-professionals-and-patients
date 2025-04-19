@@ -91,10 +91,7 @@ const LoginPatient = () => {
             </div>
           </div>
           <div className="second-section">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Logo_of_the_Ministry_of_Healthcare_of_Azerbaijan.png"
-              alt=""
-            />
+            <NavLink to = "/"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Logo_of_the_Ministry_of_Healthcare_of_Azerbaijan.png" alt="" /></NavLink>
           </div>
         </div>
       </section>
