@@ -43,7 +43,7 @@ const Home = () => {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection:"column",
+    flexDirection: "column",
     gap: 3,
     ".link": {
       border: "none",
@@ -53,9 +53,9 @@ const Home = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      gap:2,
-      transition:"all 0.6s",
-      "&:hover":{
+      gap: 2,
+      transition: "all 0.6s",
+      "&:hover": {
         backgroundColor: "#0085c9",
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
       },
@@ -98,7 +98,7 @@ const Home = () => {
               <div className="link patient">
                 <NavLink to="/patient">Vətəndaş Kimi giriş </NavLink>
                 <p className="person">
-                <FaUser />
+                  <FaUser />
                 </p>
               </div>
               <div className="link doctor">
@@ -230,9 +230,13 @@ const Home = () => {
               <div className="row">
                 {news &&
                   news.map((news) => (
-                    <div className="col-4 col-sm-12 col-sm-12" key={news._id} onClick={() => {
-                      getDetail(news._id);
-                    }}>
+                    <div
+                      className="col-4 col-sm-12 col-sm-12"
+                      key={news._id}
+                      onClick={() => {
+                        getDetail(news._id);
+                      }}
+                    >
                       <div className="newsCard">
                         <div className="image">
                           <img src={news.image} alt="" />
@@ -240,7 +244,11 @@ const Home = () => {
                         <h2>{news.name}</h2>
                         <p>
                           <CiCalendarDate />
-                          {news.date}
+                          {new Date(`${news.date}`).toLocaleDateString("en-UK", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}   
                         </p>
                       </div>
                     </div>

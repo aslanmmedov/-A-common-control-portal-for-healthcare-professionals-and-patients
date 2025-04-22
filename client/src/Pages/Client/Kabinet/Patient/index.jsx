@@ -210,7 +210,15 @@ const KabinetPatient = () => {
                         </p>
                         <p>
                           Doğum tarixi:{" "}
-                          <span>{patient?.birthday || "N/A"}</span>
+                          <span>
+                            {new Date(
+                              `${patient?.birthday}`
+                            ).toLocaleDateString("en-Us", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            }) || "N/A"}
+                          </span>
                         </p>
                         <p>
                           Şəhadətname kodu:{" "}
@@ -276,7 +284,13 @@ const KabinetPatient = () => {
                                     </>
                                   </p>
                                   <p>
-                                    <span>Tarix</span>: {v.date}
+                                    <span>Tarix</span>: {new Date(
+                              `${v.date}`
+                            ).toLocaleDateString("en-Us", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            }) || "N/A"}
                                   </p>
                                 </li>
                               ))}
@@ -316,7 +330,13 @@ const KabinetPatient = () => {
                                     )}
                                   </p>
                                   <p>
-                                    <span>Tarix</span>: {v.date}
+                                    <span>Tarix</span>: {new Date(
+                              `${v.date}`
+                            ).toLocaleDateString("en-Us", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            }) || "N/A"}
                                   </p>
                                 </li>
                               ))}
@@ -521,36 +541,38 @@ const KabinetPatient = () => {
             </div>
             <div className="row">
               <div className="col-12">
-                {patient && <div className="sendNotifcation">
-                  <h2>Müraciət Əlavə edin</h2>
-                  <div className="form">
-                    <Formik
-                      initialValues={{
-                        appeal: "",
-                      }}
-                      validationSchema={AddAppealSchema}
-                      onSubmit={async (values) => {
-                        const data = await controller.editDataById(
-                          endpoints.patients,
-                          values
-                        );
-                      }}
-                    >
-                      {({ errors, touched }) => (
-                        <Form>
-                          <Field
-                            name="name"
-                            placeholder="Bildiriş mətnini daxil edin"
-                          />
-                          {errors.name && touched.name ? (
-                            <div>{errors.name}</div>
-                          ) : null}
-                          <button type="submit">Əlavə et</button>
-                        </Form>
-                      )}
-                    </Formik>
+                {patient && (
+                  <div className="sendNotifcation">
+                    <h2>Müraciət Əlavə edin</h2>
+                    <div className="form">
+                      <Formik
+                        initialValues={{
+                          appeal: "",
+                        }}
+                        validationSchema={AddAppealSchema}
+                        onSubmit={async (values) => {
+                          const data = await controller.editDataById(
+                            endpoints.patients,
+                            values
+                          );
+                        }}
+                      >
+                        {({ errors, touched }) => (
+                          <Form>
+                            <Field
+                              name="name"
+                              placeholder="Bildiriş mətnini daxil edin"
+                            />
+                            {errors.name && touched.name ? (
+                              <div>{errors.name}</div>
+                            ) : null}
+                            <button type="submit">Əlavə et</button>
+                          </Form>
+                        )}
+                      </Formik>
+                    </div>
                   </div>
-                </div>}
+                )}
               </div>
             </div>
           </div>

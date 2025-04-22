@@ -156,7 +156,7 @@ const KabinetDoctor = () => {
                   <li>
                     <button
                       className={
-                        Page === "PA" ? "menu-btn menu-btn-i" : "menu-btn"
+                        Page === "İŞ" ? "menu-btn menu-btn-i" : "menu-btn"
                       }
                       onClick={() => {
                         setPage("İŞ");
@@ -290,11 +290,13 @@ const KabinetDoctor = () => {
                                 <Field
                                   name="name"
                                   placeholder="Bildiriş mətnini daxil edin"
+                                  className = "notField"
                                 />
                                 {errors.name && touched.name ? (
                                   <div>{errors.name}</div>
                                 ) : null}
-                                <Field as="select" name="type">
+                                <Field as="select" name="type"
+                                className = "notField">
                                   <option value="All">Hərkəs</option>
                                   <option value="Tibb Bacısı">
                                     Tibb Bacısı
@@ -509,7 +511,6 @@ const KabinetDoctor = () => {
                     </div>
                   </div>
                 ))}
-
               </div>
             </div>
           </div>
@@ -589,7 +590,17 @@ const KabinetDoctor = () => {
                         </p>
                         <p>
                           Doğum tarixi:{" "}
-                          <span>{currentPatient?.birthday || "N/A"}</span>
+                          <span>
+                            {new Date(
+                              `${currentPatient?.birthday}`
+                            ).toLocaleDateString("en-Us", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            }) ||
+                              "N/A" ||
+                              "N/A"}
+                          </span>
                         </p>
                         <p>
                           Şəhadətname kodu:{" "}
@@ -656,7 +667,15 @@ const KabinetDoctor = () => {
                                     </>
                                   </p>
                                   <p>
-                                    <span>Tarix</span>: {v.date}
+                                    <span>Tarix</span>:{" "}
+                                    {new Date(`${v.date}`).toLocaleDateString(
+                                      "en-Us",
+                                      {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                      }
+                                    ) || "N/A"}
                                   </p>
                                 </li>
                               ))}
@@ -696,7 +715,15 @@ const KabinetDoctor = () => {
                                     )}
                                   </p>
                                   <p>
-                                    <span>Tarix</span>: {v.date}
+                                    <span>Tarix</span>:{" "}
+                                    {new Date(`${v.date}`).toLocaleDateString(
+                                      "en-Us",
+                                      {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                      }
+                                    ) || "N/A"}
                                   </p>
                                 </li>
                               ))}
@@ -733,7 +760,13 @@ const KabinetDoctor = () => {
                           </div>
                         </div>
                         <div className="actions">
-                          <p>{n.date}</p>
+                          <p>
+                            {new Date(`${n.date}`).toLocaleDateString("en-Us", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                            }) || "N/A"}
+                          </p>
                           <button
                             className="btnAction"
                             onClick={() => {

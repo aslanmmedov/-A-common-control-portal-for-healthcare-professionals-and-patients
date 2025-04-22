@@ -11,13 +11,13 @@ const NewsDetail = () => {
   const getData = async () => {
     const dNews = await controller.getDataById(endpoints.d_news, id);
     const News = await controller.getDataById(endpoints.news, id);
-    if(dNews.data){
+    if (dNews.data) {
       return setNews(dNews.data);
     }
     setNews(News.data);
   };
   console.log(news);
-  
+
   // const getData = async () => {
   //   const data = await controller.getDataById(endpoints.d_news, id);
   //   setNews(data.data);
@@ -44,10 +44,16 @@ const NewsDetail = () => {
                     <h1>{news.name}</h1>
                   </div>
                   <div className="content">
-                    <p>{news.news?`${news.news}`:`${news.description}`}</p>
+                    <p>{news.news ? `${news.news}` : `${news.description}`}</p>
                   </div>
                   <div className="btn">
-                    <p>{news.date}</p>
+                    <p>
+                      {new Date(`${news.date}`).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </p>
                     <button
                       onClick={() => {
                         getDetail();
