@@ -1,14 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FiMessageCircle } from "react-icons/fi";
-import { FaArrowRightLong } from "react-icons/fa6";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../../../Context/AccesContext";
 import { DoctorsContext } from "../../../../Context/DoctorsContext";
 import { HospitalsContext } from "../../../../Context/HospitalsContext";
 import controller from "../../../../Api/controllers";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { endpoints } from "../../../../Api/constants";
+import { endpoints, WWP_URL } from "../../../../Api/constants";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { IoMdInformationCircleOutline } from "react-icons/io";
@@ -29,6 +27,7 @@ const KabinetPatient = () => {
   const [doctor, setDoctor] = useState(null);
   const [patient, setPatient] = useState(null);
   const [currentDoctor, setCurrentDoctor] = useState(null);
+  const [currentPresc, setCurrentPresc] = useState(null);
   const [partner, setPartner] = useState(null);
   const [hospital, setHospital] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
@@ -70,10 +69,7 @@ const KabinetPatient = () => {
   }, [doctor, doctors, hospitals, partner, patients, patient]);
 
   const AddAppealSchema = Yup.object().shape({
-    appeal: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Required"),
+    appeal: Yup.string().min(2, "Too Short!").max(50, "Too Long!"),
   });
   const AddMessageSchema = Yup.object().shape({
     name: Yup.string()
@@ -81,8 +77,8 @@ const KabinetPatient = () => {
       .max(50, "Too Long!")
       .required("Required"),
   });
-  const deleteAppeal = async (dId, id) => {
-    await controller.editDataById(dId, endpoints.patients, id);
+  const deleteAppeal = async (id) => {
+    await controller.editDataById(endpoints.ap, patient._id, id);
   };
   // const handlePatient = (id) => {
   //   console.log("id",id);
@@ -101,6 +97,10 @@ const KabinetPatient = () => {
   const handleDoctor = (id) => {
     const found = doctors.find((p) => p._id === id);
     setCurrentDoctor(found && found);
+  };
+  const handlePresc = (id) => {
+    const found = patient.prescriptions.find((p) => p._id === id);
+    setCurrentPresc(found && found);
   };
   return (
     <main id="patient_kabinet">
@@ -157,6 +157,18 @@ const KabinetPatient = () => {
                     }}
                   >
                     Müraciətlər
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className={
+                      Page === "PR" ? "menu-btn menu-btn-i" : "menu-btn"
+                    }
+                    onClick={() => {
+                      setPage("PR");
+                    }}
+                  >
+                    e-Resept
                   </button>
                 </li>
               </ul>
@@ -529,7 +541,7 @@ const KabinetPatient = () => {
                           >
                             <button
                               onClick={() => {
-                                deleteAppeal(patient._id, n._id);
+                                deleteAppeal(n._id);
                               }}
                             >
                               Silin
@@ -554,26 +566,24 @@ const KabinetPatient = () => {
                           appeal: "",
                         }}
                         validationSchema={AddAppealSchema}
+                        onSubmit={async (values) => {
+                          const data = await controller.editDataById(
+                            endpoints.ap,
+                            patient._id,
+                            values
+                          );
+                        }}
                       >
                         {({ errors, touched }) => (
                           <Form>
                             <Field
-                              name="name"
+                              name="appeal"
                               placeholder="Bildiriş mətnini daxil edin"
                             />
-                            {errors.name && touched.name ? (
-                              <div>{errors.name}</div>
+                            {errors.appeal && touched.appeal ? (
+                              <div>{errors.appeal}</div>
                             ) : null}
-                            <button
-                              onClick={async (values) => {
-                                const data = await controller.editDataById(
-                                  endpoints.patients,
-                                  values
-                                );
-                              }}
-                            >
-                              Əlavə et
-                            </button>
+                            <button type="submit">Əlavə et</button>
                           </Form>
                         )}
                       </Formik>
@@ -581,6 +591,104 @@ const KabinetPatient = () => {
                   </div>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {Page === "PR" && (
+        <div className="container">
+          <div className="contentPatients">
+            <div className="sider">
+              {patient &&
+                patient.prescriptions?.map((p) => (
+                  <div className="patient" key={p._id}>
+                    <div className="first">
+                      <div className="icon">
+                        <BsFillPersonCheckFill />
+                      </div>
+                      <div className="text">
+                        <p>{p.date.slice(0, 10)}</p>
+                      </div>
+                    </div>
+                    <div className="btn">
+                      <button
+                        onClick={() => {
+                          handlePresc(p._id);
+                        }}
+                      >
+                        Bax...
+                      </button>
+                    </div>
+                  </div>
+                ))}
+            </div>
+            <div className="paBody">
+              {currentPresc !== null ? (
+                <div className="paInside">
+                  <div className="patientInfo">
+                    <div className="ownProfile">
+                      <div className="about presc">
+                        <div className="pr">
+                          <div className="prescF">
+                            <p>
+                              Həkim:{" "}
+                              <span>
+                                {doctor?.name || "N/A"}{" "}
+                                {doctor?.surname || "N/A"}
+                              </span>
+                            </p>
+                            <p>
+                              Əlaqə nömrəsi:{" "}
+                              <span>{doctor?.phoneNumber || "N/A"}</span>
+                            </p>
+                          </div>
+                          <div className="prescS">
+                            <p>
+                              Pasiyent:{" "}
+                              <span>
+                                {patient?.name || "N/A"}{" "}
+                                {patient?.surname || "N/A"}
+                              </span>
+                            </p>
+                            <p>
+                              Doğum tarixi:{" "}
+                              <span>
+                                {patient?.birthday.slice(0, 10) || "N/A"}
+                              </span>
+                            </p>
+                            <br />
+                            <p>
+                              Müayinə tarixi:{" "}
+                              <span>
+                                {currentPresc?.date.slice(0, 10) || "N/A"}
+                              </span>
+                            </p>
+                            <br />
+                            <div className="img">
+                              <img src="./images/Home/frame.png" alt="" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="r">
+                          <p>
+                            Diaqnoz:{" "}
+                            <span>{currentPresc?.diagnosis || "N/A"}</span>
+                          </p>
+                          <br />
+                          <p>
+                            Resept:{" "}
+                            <span>
+                              {currentPresc?.prescriptionContent || "N/A"}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <p className="errorMesage">Resept Seçilməyib</p>
+              )}
             </div>
           </div>
         </div>

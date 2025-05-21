@@ -36,7 +36,7 @@ const PatientSchema = new Schema(
         date:{type:Date,default:null},
         diagnosis:{type:String,default:null},
         prescriptionContent:{type:String,default:null},
-        doctorId:{type:String,default:null}
+        doctorId:{type:String,default:null},
       }
     ],
     vaccines: [

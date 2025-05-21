@@ -1,5 +1,7 @@
 export const BASE_URL = "http://localhost:8080/api";
-export const WWP_URL = "http://localhost:8080/api/p";
+export const WWP_URL = "http://localhost:8080/api";
+export const PRR_URL = "http://localhost:8080/api/pr";
+
 export const endpoints = {
     news: "news",
     doctors:"doctors",
@@ -13,5 +15,10 @@ export const endpoints = {
     doctor_login:"doctor_login",
     d_news:"d_news",
     notifications:"notifications",
-    admin_login:"admin/admin_login"
+    admin_login:"admin/admin_login",
+    ap:"ap",
+    cp:"cp",
+    pp:"pp",
+    vp:"vp",
+    mp:"mp"
 }

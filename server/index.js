@@ -12,6 +12,7 @@ const AuthDoctorRouter = require("./routers/authDoctorRouter");
 const LoginAdminRouter = require("./routers/adminRouter");
 const NotificationRouter = require("./routers/NotificationRouter");
 const DoctorNewsRouter = require("./routers/DoctorNewsRouter");
+const addPrescription = require("./routers/AddPrescriptionRouter");
 const app = express()
 const port = 8080
 const path = require("path");
@@ -29,7 +30,8 @@ app.use('/api/d_news',DoctorNewsRouter)
 app.use('/api', AuthPatientRouter);
 app.use('/api', AuthDoctorRouter);
 app.use('/api/admin', LoginAdminRouter);
-app.use('/api/',PatientMessage)
+app.use('/api',PatientMessage);
+app.use('/api/pr',addPrescription);
 
 app.use(express.static(path.join(__dirname, "images")));
 app.use(express.static(path.join(__dirname, "documents")));
