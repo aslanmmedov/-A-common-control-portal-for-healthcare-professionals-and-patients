@@ -232,8 +232,8 @@ const KabinetDoctor = () => {
                         <img
                           src={
                             doctor?.gender === "Kişi"
-                              ? "https://pngimg.com/d/doctor_PNG15980.png"
-                              : "https://purepng.com/public/uploads/thumbnail/purepng.com-doctordoctorsdoctors-and-nursesclinicianmedical-practitionernotepadfemale-1421526857221xttxe.png"
+                              ? "https://images.unsplash.com/photo-1620928269189-dc4ee9d981c0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZG9jdG9yfGVufDB8fDB8fHww"
+                              : "https://sebakoreyamed.az/doctorfotos/2022/05/20/808241653033030.jpg"
                           }
                           alt="Doctor"
                         />
@@ -325,7 +325,7 @@ const KabinetDoctor = () => {
                             <img
                               src={
                                 partner.gender === "Kişi"
-                                  ? "https://pngimg.com/d/doctor_PNG15980.png"
+                                  ? "https://amu.edu.az/storage/photos/43/Professor-m%C3%BC%C9%99llim/Mahmudov%20R%C9%99%C5%9Fid%20Mahmud%20o..jpg"
                                   : "https://purepng.com/public/uploads/thumbnail/purepng.com-doctordoctorsdoctors-and-nursesclinicianmedical-practitionernotepadfemale-1421526857221xttxe.png"
                               }
                               alt="Partner"
@@ -472,8 +472,8 @@ const KabinetDoctor = () => {
                           <img
                             src={
                               doctor?.gender === "Kişi"
-                                ? "https://pngimg.com/d/doctor_PNG15980.png"
-                                : "https://purepng.com/public/uploads/thumbnail/purepng.com-doctordoctorsdoctors-and-nursesclinicianmedical-practitionernotepadfemale-1421526857221xttxe.png"
+                                ? "https://amu.edu.az/storage/photos/43/Professor-m%C3%BC%C9%99llim/Mahmudov%20R%C9%99%C5%9Fid%20Mahmud%20o..jpg"
+                                : "https://www.doktorsitesi.az/media/cache/profil_500/uploads/profile_self_image/7405dad268e4b9a6a8872e237bffcbfa.webp"
                             }
                             alt="Doctor"
                           />

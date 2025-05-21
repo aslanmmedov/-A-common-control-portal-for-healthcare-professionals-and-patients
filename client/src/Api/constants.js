@@ -1,5 +1,5 @@
-export const BASE_URL = "http://localhost:8080/api"
-
+export const BASE_URL = "http://localhost:8080/api";
+export const WWP_URL = "http://localhost:8080/api/p";
 export const endpoints = {
     news: "news",
     doctors:"doctors",

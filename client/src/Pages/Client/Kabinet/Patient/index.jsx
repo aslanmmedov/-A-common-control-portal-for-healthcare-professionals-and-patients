@@ -284,13 +284,15 @@ const KabinetPatient = () => {
                                     </>
                                   </p>
                                   <p>
-                                    <span>Tarix</span>: {new Date(
-                              `${v.date}`
-                            ).toLocaleDateString("en-Us", {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                            }) || "N/A"}
+                                    <span>Tarix</span>:{" "}
+                                    {new Date(`${v.date}`).toLocaleDateString(
+                                      "en-Us",
+                                      {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                      }
+                                    ) || "N/A"}
                                   </p>
                                 </li>
                               ))}
@@ -330,13 +332,15 @@ const KabinetPatient = () => {
                                     )}
                                   </p>
                                   <p>
-                                    <span>Tarix</span>: {new Date(
-                              `${v.date}`
-                            ).toLocaleDateString("en-Us", {
-                              year: "numeric",
-                              month: "short",
-                              day: "numeric",
-                            }) || "N/A"}
+                                    <span>Tarix</span>:{" "}
+                                    {new Date(`${v.date}`).toLocaleDateString(
+                                      "en-Us",
+                                      {
+                                        year: "numeric",
+                                        month: "short",
+                                        day: "numeric",
+                                      }
+                                    ) || "N/A"}
                                   </p>
                                 </li>
                               ))}
@@ -412,7 +416,7 @@ const KabinetPatient = () => {
                           <img
                             src={
                               currentDoctor?.gender === "Kişi"
-                                ? "https://pngimg.com/d/doctor_PNG15980.png"
+                                ? "https://images.unsplash.com/photo-1620928269189-dc4ee9d981c0?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZG9jdG9yfGVufDB8fDB8fHww"
                                 : "https://purepng.com/public/uploads/thumbnail/purepng.com-doctordoctorsdoctors-and-nursesclinicianmedical-practitionernotepadfemale-1421526857221xttxe.png"
                             }
                             alt="Doctor"
@@ -550,12 +554,6 @@ const KabinetPatient = () => {
                           appeal: "",
                         }}
                         validationSchema={AddAppealSchema}
-                        onSubmit={async (values) => {
-                          const data = await controller.editDataById(
-                            endpoints.patients,
-                            values
-                          );
-                        }}
                       >
                         {({ errors, touched }) => (
                           <Form>
@@ -566,7 +564,16 @@ const KabinetPatient = () => {
                             {errors.name && touched.name ? (
                               <div>{errors.name}</div>
                             ) : null}
-                            <button type="submit">Əlavə et</button>
+                            <button
+                              onClick={async (values) => {
+                                const data = await controller.editDataById(
+                                  endpoints.patients,
+                                  values
+                                );
+                              }}
+                            >
+                              Əlavə et
+                            </button>
                           </Form>
                         )}
                       </Formik>
