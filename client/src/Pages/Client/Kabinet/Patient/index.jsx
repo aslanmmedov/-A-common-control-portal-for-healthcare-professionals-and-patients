@@ -18,6 +18,8 @@ import { PatientsContext } from "../../../../Context/PatientsContext";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+
+
 const KabinetPatient = () => {
   const { token } = useContext(AuthContext);
   const { doctors } = useContext(DoctorsContext);
@@ -32,6 +34,7 @@ const KabinetPatient = () => {
   const [hospital, setHospital] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   const [Page, setPage] = useState("ÜN");
+  
   useEffect(() => {
     if (!token) return;
 

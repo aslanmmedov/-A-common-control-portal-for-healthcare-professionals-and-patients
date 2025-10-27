@@ -1,4 +1,7 @@
-export const BASE_URL = "http://localhost:8080/api";
+// export const BASE_URL = "http://localhost:8080/api";
+// constants.ts
+export const BASE_URL = (window).__ENV__?.API_URL;
+
 export const WWP_URL = "http://localhost:8080/api";
 export const PRR_URL = "http://localhost:8080/api/pr";
 

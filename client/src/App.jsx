@@ -17,8 +17,26 @@ import KabinetDoctor from './Pages/Client/Kabinet/Doctor'
 import KabinetPatient from './Pages/Client/Kabinet/Patient'
 import NewsDetail from './Pages/Client/Kabinet/Doctor/newsDetail/newsDetail'
 import AboutPage from './Pages/Client/About'
-
+import {useEffect} from 'react'
+import {API_URL} from "../src/env"
 function App() {
+  useEffect(() => {
+    // Example: use API_URL from runtime env; if it's '/api' the backend proxy will forward it.
+    const url = `${API_URL.replace(/\/$/, '')}/users`;
+    fetch(url, {
+      method: "GET",
+      credentials: "include", // if you use cookie-based auth
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`Status ${res.status}`);
+        return res.json();
+      })
+      .then((data) => setUsers(data))
+      .catch((err) => setError(String(err)));
+  }, []);
   return (
     <>
       <Routes>
